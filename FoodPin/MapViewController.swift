@@ -16,24 +16,65 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        convertAddressToCoordinate()
+        mapView.delegate = self;
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: Address to Coordinate 
     func convertAddressToCoordinate() {
         let geoCoder = CLGeocoder()
         guard let location = restaurant?.location else { return }
              geoCoder.geocodeAddressString(location) { (placeMarks, error) in
-                guard error != nil else {
+                if error != nil {
                     print(error)
-                    return }
+                    return 
+                }
+                if let placeMarks = placeMarks {
+                    // Get first place mark
+                    let placeMark = placeMarks[0]
+
+                    // Add annotation
+                    let annotation = MKPointAnnotation()
+                    annotation.title = self.restaurant?.name
+                    annotation.subtitle = self.restaurant?.type
+
+                    if let location = placeMark.location {
+                        annotation.coordinate = location.coordinate
+
+                        // Display annotation 
+                        self.mapView.showAnnotations([annotation], animated: true)
+                        self.mapView.selectAnnotation(annotation, animated: true)
+                    }
+
+                }
              }
+    }
+}
+// MARK: MKMapView PROTOCOLS
+extension MapViewController: MKMapViewDelegate {
 
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "RestaurantPin"
 
+        if annotation.isKind(of: MKUserLocation.self){
+            return nil
+        }
+        // Reuse the annotation if possible
+        var annotationView: MKPinAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+        }
+        let leftIconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 53, height: 53))
+
+        if let restaurantImage = restaurant?.image {
+            leftIconView.image = UIImage(named: restaurantImage)
+        }
+        annotationView?.leftCalloutAccessoryView = leftIconView
+        annotationView?.pinTintColor = UIColor.red
+        return annotationView
     }
 }

@@ -16,9 +16,6 @@ class DetailViewController: UIViewController {
 
     @IBOutlet var ratingButton:UIButton!
 
-
-
-    //Test create object 
     var restaurant: Restaurant?
 
     override func viewDidLoad() {
@@ -56,18 +53,11 @@ class DetailViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    @IBAction func close(_ segue: UIStoryboardSegue) {
-        if let reviewViewController = segue.source as? ReviewViewController {
-            if let rating = reviewViewController.rating {
-                restaurant?.rating = rating
-                ratingButton.setImage(UIImage(named: rating), for: UIControlState())
-                tableView.reloadData()
-            }
-        }
-    }
+
 }
 
 // MARK: TableView PROTOCOLS
+
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -99,6 +89,24 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         return detailCell
     }
 
-    
+}
+// MARK: SEGUES
+extension DetailViewController {
 
+    @IBAction func close(_ segue: UIStoryboardSegue) {
+        if let reviewViewController = segue.source as? ReviewViewController {
+            if let rating = reviewViewController.rating {
+                restaurant?.rating = rating
+                ratingButton.setImage(UIImage(named: rating), for: UIControlState())
+                tableView.reloadData()
+            }
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMap" {
+            let mapController = segue.destination as! MapViewController
+            mapController.restaurant = restaurant
+        }
+    }
 }
