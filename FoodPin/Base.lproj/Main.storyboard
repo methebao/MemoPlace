@@ -187,6 +187,11 @@
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="map"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="d0R-ql-xfC" kind="show" identifier="showMap" id="AnI-Qp-u79"/>
                                 </connections>
@@ -339,7 +344,7 @@
         <!--New Restaurant-->
         <scene sceneID="kVy-jr-a3r">
             <objects>
-                <tableViewController id="MrJ-8U-HX3" sceneMemberID="viewController">
+                <tableViewController id="MrJ-8U-HX3" customClass="AddRestaurantController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="d6f-bR-bgv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -530,6 +535,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imgView" destination="f25-S9-App" id="lF8-HM-k87"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uZN-B5-2Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="nPC-ST-j9Q" userLabel="Exit" sceneMemberID="exit"/>

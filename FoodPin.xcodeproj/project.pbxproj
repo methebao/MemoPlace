@@ -19,7 +19,7 @@
 		7F93F1D81DD2DB5C0026B113 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F93F1D71DD2DB5C0026B113 /* ReviewViewController.swift */; };
 		7F93F1DB1DD34D6B0026B113 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F93F1DA1DD34D6B0026B113 /* MapKit.framework */; };
 		7F93F1DD1DD350390026B113 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F93F1DC1DD350390026B113 /* MapViewController.swift */; };
-		7F93F1DF1DD36E0E0026B113 /* AddRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F93F1DE1DD36E0E0026B113 /* AddRestaurantController.swift */; };
+		7F93F1E11DD36E8E0026B113 /* AddRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F93F1E01DD36E8E0026B113 /* AddRestaurantController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +37,7 @@
 		7F93F1D71DD2DB5C0026B113 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		7F93F1DA1DD34D6B0026B113 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7F93F1DC1DD350390026B113 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		7F93F1DE1DD36E0E0026B113 /* AddRestaurantController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRestaurantController.swift; sourceTree = "<group>"; };
+		7F93F1E01DD36E8E0026B113 /* AddRestaurantController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRestaurantController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +97,7 @@
 				7F93F1CE1DD2B74E0026B113 /* DetailViewCell.swift */,
 				7F93F1D71DD2DB5C0026B113 /* ReviewViewController.swift */,
 				7F93F1DC1DD350390026B113 /* MapViewController.swift */,
-				7F93F1DE1DD36E0E0026B113 /* AddRestaurantController.swift */,
+				7F93F1E01DD36E8E0026B113 /* AddRestaurantController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -207,7 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F93F1DF1DD36E0E0026B113 /* AddRestaurantController.swift in Sources */,
+				7F93F1E11DD36E8E0026B113 /* AddRestaurantController.swift in Sources */,
 				7F8F0CC61DD1BAC50028B2B6 /* RestaurantTableViewController.swift in Sources */,
 				7F8F0CB41DD1BAA00028B2B6 /* AppDelegate.swift in Sources */,
 				7F93F1D81DD2DB5C0026B113 /* ReviewViewController.swift in Sources */,
