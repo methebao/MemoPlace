@@ -11,16 +11,15 @@ import UIKit
 class AddRestaurantController: UITableViewController {
 
     @IBOutlet weak var imgView: UIImageView!
-
+    @IBOutlet weak var yesButton: UIButton!
+    @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var typeField: UITextField!
+    @IBOutlet weak var locationField: UITextField!
+    var isVisited = true
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
     }
 
     // Configure UI 
@@ -28,6 +27,7 @@ class AddRestaurantController: UITableViewController {
     func configureUI(){
 
         // Navigation
+        
         if let barFont = UIFont(name: "Avenir-Light", size: 24.0) {
             self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,NSFontAttributeName: barFont]
         }
@@ -49,10 +49,48 @@ class AddRestaurantController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    // CHECK Fields completed 
+    @IBAction func selectBeenHereField(sender: UIButton) {
+
+        switch sender.tag {
+        case 1:
+            yesButton.backgroundColor = UIColor.red
+            noButton.backgroundColor = UIColor.gray
+
+        case 2:
+            isVisited = false
+            noButton.backgroundColor = UIColor.red
+            yesButton.backgroundColor = UIColor.gray
+
+        default: break
+        }
+    }
+    @IBAction func saveFilledInformations() {
+        guard nameField.text?.isEmpty == false , typeField.text?.isEmpty == false, locationField.text?.isEmpty == false else {
+            showAlert(title: "Can't Save", message: "Because name fields is blank. Please note that all fields are required.", style: .alert)
+            return
+        }
+        // Bonus feature : Handle user fill " " and not have any characters. 
+
+
+        // Handled Filling Informations
+
+        performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
+        dismiss(animated: true, completion: nil)
+        
+
+    }
+    // Alert Controller
+    func showAlert(title: String?, message: String?, style: UIAlertControllerStyle) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 
 }
 
-// MARK:  UIImagePickerControllerDelegate PROTOCOLS
+// MARK:  UIImagePicker PROTOCOLS
 extension AddRestaurantController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
@@ -60,13 +98,14 @@ extension AddRestaurantController: UIImagePickerControllerDelegate,UINavigationC
         imgView.contentMode = UIViewContentMode.scaleAspectFill
         imgView.clipsToBounds = true
 
+        // Auto Layout Constraints 
+
         let leadingConstraint = NSLayoutConstraint(item: imgView, attribute: .leading, relatedBy: .equal, toItem: imgView.superview, attribute: .leading, multiplier: 1.0, constant: 0)
         let trailingConstraint = NSLayoutConstraint(item: imgView, attribute: .trailing, relatedBy: .equal, toItem: imgView.superview, attribute: .trailing, multiplier: 1.0, constant: 0)
         let topConstraint = NSLayoutConstraint(item: imgView, attribute: .top, relatedBy: .equal, toItem: imgView.superview, attribute: .top, multiplier: 1.0, constant: 0)
         let bottomConstraint = NSLayoutConstraint(item: imgView, attribute: .bottom, relatedBy: .equal, toItem: imgView.superview, attribute: .bottom, multiplier: 1.0, constant: 0)
         let constraints: [NSLayoutConstraint] = [leadingConstraint,trailingConstraint,topConstraint,bottomConstraint]
         _ = constraints.map { $0.isActive = true }
-
 
 
         dismiss(animated: true, completion: nil)

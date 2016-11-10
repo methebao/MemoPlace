@@ -137,7 +137,6 @@ class RestaurantTableViewController: UITableViewController {
 extension RestaurantTableViewController {
 
     @IBAction func unwindToHomeScreen(_segue: UIStoryboardSegue){
-        
     }
 }
 

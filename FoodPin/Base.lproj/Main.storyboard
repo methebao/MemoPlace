@@ -94,7 +94,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WJu-WR-7P2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="949.60000000000002" y="107.49625187406298"/>
+            <point key="canvasLocation" x="996" y="107"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="GA6-z2-wj0">
@@ -339,7 +339,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vlb-iR-Y8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JlI-zV-IG4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2573" y="107"/>
+            <point key="canvasLocation" x="2426" y="107"/>
         </scene>
         <!--New Restaurant-->
         <scene sceneID="kVy-jr-a3r">
@@ -387,7 +387,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Restaurant name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CR1-D8-GxZ">
-                                                            <rect key="frame" x="0.0" y="30.5" width="113.5" height="19"/>
+                                                            <rect key="frame" x="0.0" y="30.5" width="300" height="19"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="300" id="M4I-Zr-hNi"/>
+                                                            </constraints>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -420,7 +423,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Restaurant type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HVq-sV-BJi">
-                                                            <rect key="frame" x="0.0" y="30.5" width="106.5" height="19"/>
+                                                            <rect key="frame" x="0.0" y="30.5" width="300" height="19"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="300" id="XbJ-xG-cBi"/>
+                                                            </constraints>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -453,7 +459,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iSf-sD-mYt">
-                                                            <rect key="frame" x="0.0" y="30.5" width="57" height="19"/>
+                                                            <rect key="frame" x="0.0" y="30.5" width="300" height="19"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="300" id="BYk-Lc-RCH"/>
+                                                            </constraints>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -488,7 +497,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rwi-bA-YVT">
                                                             <rect key="frame" x="0.0" y="19.5" width="110" height="30"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceS-Sb-UxP">
+                                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceS-Sb-UxP">
                                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                                     <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
@@ -496,8 +505,11 @@
                                                                     </constraints>
                                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <state key="normal" title="YES"/>
+                                                                    <connections>
+                                                                        <action selector="selectBeenHereFieldWithSender:" destination="MrJ-8U-HX3" eventType="touchUpInside" id="vTr-Tk-jZM"/>
+                                                                    </connections>
                                                                 </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3n-E9-ehh">
+                                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3n-E9-ehh">
                                                                     <rect key="frame" x="60" y="0.0" width="50" height="30"/>
                                                                     <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
@@ -505,6 +517,9 @@
                                                                     </constraints>
                                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <state key="normal" title="NO"/>
+                                                                    <connections>
+                                                                        <action selector="selectBeenHereFieldWithSender:" destination="MrJ-8U-HX3" eventType="touchUpInside" id="ABi-2P-SIj"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -534,15 +549,26 @@
                                 <segue destination="nPC-ST-j9Q" kind="unwind" unwindAction="unwindToHomeScreenWith_segue:" id="xO1-ml-IJJ"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="UbH-8e-H5m">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="saveFilledInformations" destination="MrJ-8U-HX3" id="QTf-4N-mhf"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="imgView" destination="f25-S9-App" id="lF8-HM-k87"/>
+                        <outlet property="locationField" destination="iSf-sD-mYt" id="sds-b2-CGL"/>
+                        <outlet property="nameField" destination="CR1-D8-GxZ" id="gpq-on-Xzg"/>
+                        <outlet property="noButton" destination="J3n-E9-ehh" id="dkG-Mw-0CW"/>
+                        <outlet property="typeField" destination="HVq-sV-BJi" id="8st-cu-ZeX"/>
+                        <outlet property="yesButton" destination="ceS-Sb-UxP" id="TNv-e5-sPi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uZN-B5-2Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="nPC-ST-j9Q" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2184" y="-996"/>
+            <point key="canvasLocation" x="996" y="-586"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="DVo-f1-ajC">
@@ -574,7 +600,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hj-rP-3ML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2573" y="864"/>
+            <point key="canvasLocation" x="1744" y="799"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LDD-qQ-QqX">
@@ -592,7 +618,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FrE-db-uxx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.59999999999999" y="108.39580209895054"/>
+            <point key="canvasLocation" x="214" y="108"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="i92-2S-qcv">
@@ -610,7 +636,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfp-Ye-wxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="878" y="-996"/>
+            <point key="canvasLocation" x="214" y="-586"/>
         </scene>
     </scenes>
     <resources>
