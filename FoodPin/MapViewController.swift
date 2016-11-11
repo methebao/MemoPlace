@@ -71,7 +71,7 @@ extension MapViewController: MKMapViewDelegate {
         let leftIconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 53, height: 53))
 
         if let restaurantImage = restaurant?.image {
-            leftIconView.image = UIImage(named: restaurantImage)
+            leftIconView.image = UIImage(data: restaurantImage as Data)
         }
         annotationView?.leftCalloutAccessoryView = leftIconView
         annotationView?.pinTintColor = UIColor.red

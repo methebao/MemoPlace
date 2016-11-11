@@ -21,7 +21,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let restaurant = restaurant else { return }
-        restaurantImageView.image = UIImage(named: restaurant.image)
+        restaurantImageView.image = UIImage(data: restaurant.image as! Data)
         configureUI()
     }
 
@@ -82,7 +82,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         case 4: detailCell.fieldLabel.text = "Rating"
             detailCell.valueLabel.text = restaurant.rating
         case 5: detailCell.fieldLabel.text = "Been here"
-        detailCell.valueLabel.text = (restaurant.isVisited) ? "Yes, I've been here before": "No"
+            detailCell.valueLabel.text = (restaurant.isVisited) ? "Yes, I've been here before": "No"
         default: detailCell.fieldLabel.text = ""
                 detailCell.valueLabel.text = ""
         }

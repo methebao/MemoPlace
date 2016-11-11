@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 class AddRestaurantController: UITableViewController {
 
     @IBOutlet weak var imgView: UIImageView!
@@ -17,6 +17,8 @@ class AddRestaurantController: UITableViewController {
     @IBOutlet weak var typeField: UITextField!
     @IBOutlet weak var locationField: UITextField!
     var isVisited = true
+    var restaurant: Restaurant!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -70,14 +72,26 @@ class AddRestaurantController: UITableViewController {
             showAlert(title: "Can't Save", message: "Because name fields is blank. Please note that all fields are required.", style: .alert)
             return
         }
+        let appDel = (UIApplication.shared.delegate as! AppDelegate)
+        let context = appDel.persistentContainer.viewContext
+        restaurant = NSEntityDescription.insertNewObject(forEntityName: "Restaurant", into: context) as! Restaurant
         // Bonus feature : Handle user fill " " and not have any characters. 
+        restaurant.name = nameField.text
+        restaurant.type = typeField.text
+        restaurant.location = locationField.text
+        if let image = UIImagePNGRepresentation((imgView.image)!) {
+            restaurant.image = image as NSData?
+        }
+        restaurant.isVisited = isVisited
+
+        appDel.saveContext()
+
 
 
         // Handled Filling Informations
 
         performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
         dismiss(animated: true, completion: nil)
-        
 
     }
     // Alert Controller

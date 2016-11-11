@@ -546,13 +546,13 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="STt-Zx-krt">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="nPC-ST-j9Q" kind="unwind" unwindAction="unwindToHomeScreenWith_segue:" id="xO1-ml-IJJ"/>
+                                <segue destination="nPC-ST-j9Q" kind="unwind" identifier="unwindToHomeScreen" unwindAction="unwindToHomeScreenWith_segue:" id="xO1-ml-IJJ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="UbH-8e-H5m">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="saveFilledInformations" destination="MrJ-8U-HX3" id="QTf-4N-mhf"/>
+                                <action selector="saveFilledInformations" destination="MrJ-8U-HX3" id="WHL-FD-M49"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
