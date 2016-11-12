@@ -14,49 +14,74 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         return RestaurantDataSource(tableView: self.tableView)
     }()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         tableView.dataSource = dataSource
-        
-    }
+        dataSource.searchController = UISearchController(searchResultsController: nil)
+        configureUI()
 
+    }
+    // MARK: - Configure Hide - Show Navigation Bar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.hidesBarsOnSwipe = true
-        UIApplication.shared.statusBarStyle = .lightContent
-
+        //navigationController?.hidesBarsOnSwipe = true
     }
 
-    // MARK: - Configure Navigation Bar 
+    // MARK: - Configure UI
     func configureUI(){
-
-        // Navigation
-        if let barFont = UIFont(name: "Avenir-Light", size: 24.0) {
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,NSFontAttributeName: barFont]
-        }
-        self.navigationController!.navigationBar.barTintColor = UIColor(red: 242.0/255.0, green:
-            116.0/255.0, blue: 119.0/255.0, alpha: 1.0)
-        title = "FoodPin"
-
+        // Navigation 
+            title = "FoodPin"
         // Table View
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableViewAutomaticDimension
-
-
+        // Search Bar
+        tableView.tableHeaderView = dataSource.searchController.searchBar
+        dataSource.searchController.searchResultsUpdater = self
+        dataSource.searchController.hidesNavigationBarDuringPresentation = false
+        dataSource.searchController.dimsBackgroundDuringPresentation = false
+        dataSource.searchController.searchBar.barTintColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
+            dataSource.searchController.searchBar.tintColor = UIColor.white
+        dataSource.searchController.searchBar.placeholder = "Search restaurants..."
     }
-    
-    // MARK: TableView DELEGATE
+
+    // MARK: Search Bar
+    func filterContentForSearchText(searchText: String) {
+        guard let restaurants = dataSource.resultController.fetchedObjects else { return }
+        dataSource.searchResults = restaurants.filter({ (restaurant: Restaurant) -> Bool in
+            if ((restaurant.name?.range(of: searchText, options: .caseInsensitive)) != nil) {
+                return true
+            }
+            if ((restaurant.location?.range(of: searchText, options: .caseInsensitive)) != nil) {
+                return true
+            }
+            return false
+        })
+    }
+}
+
+// MARK: SEGUES
+
+extension RestaurantTableViewController {
+
+    @IBAction func unwindToHomeScreen(_segue: UIStoryboardSegue){
+    }
+}
+
+// MARK: TableView DELEGATE
+
+extension RestaurantTableViewController {
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //  TO Detail View Controller
         let detailController = storyboard?.instantiateViewController(withIdentifier: "detailView") as! DetailViewController
-        detailController.restaurant = dataSource.resultController.object(at: indexPath)
+        detailController.restaurant = (dataSource.searchController.isActive) ? dataSource.searchResults[indexPath.row] : dataSource.resultController.object(at: indexPath)
         navigationController?.pushViewController(detailController, animated: true)
     }
+
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
         let restaurant = dataSource.resultController.object(at: indexPath)
+        
         // Social Sharing Button
         let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Share", handler: { (action, indexPath) -> Void in
 
@@ -79,19 +104,18 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         // Set the button color
         shareAction.backgroundColor = UIColor.blue
         deleteAction.backgroundColor = UIColor.red
-
+        
         return [deleteAction, shareAction]
     }
 
-
-//
 }
+//MARK: Search Controller DELEGATES
+extension RestaurantTableViewController: UISearchResultsUpdating {
 
-// MARK: SEGUES 
-
-extension RestaurantTableViewController {
-
-    @IBAction func unwindToHomeScreen(_segue: UIStoryboardSegue){
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContentForSearchText(searchText: searchText)
+            tableView.reloadData()
+        }
     }
 }
-

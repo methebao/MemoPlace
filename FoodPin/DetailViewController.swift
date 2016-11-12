@@ -20,17 +20,13 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let restaurant = restaurant else { return }
-        restaurantImageView.image = UIImage(data: restaurant.image as! Data)
         configureUI()
     }
 
+    // MARK: - Configure UI
     func configureUI(){
-        // Navigation 
-        title = restaurant?.name
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        // Table View
+        guard let restaurant = restaurant else { return }
+        restaurantImageView.image = UIImage(data: restaurant.image as! Data)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -41,15 +37,11 @@ class DetailViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-
-    }
-    
+    // MARK: - Configure Hide - Show Navigation Bar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationController?.hidesBarsOnSwipe = false
+        //navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 

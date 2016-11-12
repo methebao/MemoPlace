@@ -21,14 +21,13 @@ class MapViewController: UIViewController {
 
     }
 
-
     // MARK: Address to Coordinate 
     func convertAddressToCoordinate() {
         let geoCoder = CLGeocoder()
         guard let location = restaurant?.location else { return }
              geoCoder.geocodeAddressString(location) { (placeMarks, error) in
                 if error != nil {
-                    print(error)
+                    print("Unresolved Error: \(error), \(error?.localizedDescription)")
                     return 
                 }
                 if let placeMarks = placeMarks {

@@ -11,6 +11,10 @@ import UIKit
 import CoreData
 class RestaurantDataSource: NSObject, UITableViewDataSource {
     private let tableView: UITableView
+    
+    var searchController: UISearchController!
+    
+    var searchResults: [Restaurant] = []
 
     let managedObjectcontext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
@@ -33,10 +37,15 @@ class RestaurantDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        if searchController.isActive {
+            return searchResults.count
+        }
+
         return resultController.sections?[section].numberOfObjects ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let restaurant = resultController.object(at: indexPath)
+        let restaurant = (searchController.isActive) ? searchResults[indexPath.row] : resultController.object(at: indexPath)
         let restaurantCell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantViewCell
 
         restaurantCell.imgView.image = UIImage(data: restaurant.image as! Data)
@@ -51,6 +60,9 @@ class RestaurantDataSource: NSObject, UITableViewDataSource {
    
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if searchController.isActive {
+            return false 
+        }
         return true
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

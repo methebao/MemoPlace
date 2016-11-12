@@ -17,18 +17,21 @@ class ReviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
+    }
+
+    // Configure UI 
+    func configureUI() {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
         backgroundImageView.addSubview(blurEffectView)
-
         ratingStackView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
 
     }
 
     override func viewDidAppear(_ animated: Bool) {
-//        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: { self.ratingStackView.transform = CGAffineTransform.identity }, completion: nil)
-        
+
         //SPRING Animation
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.3,
         initialSpringVelocity: 0.5, options: [], animations: {
@@ -36,6 +39,7 @@ class ReviewViewController: UIViewController {
         }, completion: nil)
 
     }
+    
     @IBAction func ratingSelected(sender: UIButton) {
         switch sender.tag {
         case 1: rating = "dislike"

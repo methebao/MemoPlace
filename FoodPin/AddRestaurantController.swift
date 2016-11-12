@@ -21,37 +21,10 @@ class AddRestaurantController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
     }
 
-    // Configure UI 
 
-    func configureUI(){
-
-        // Navigation
-        
-        if let barFont = UIFont(name: "Avenir-Light", size: 24.0) {
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,NSFontAttributeName: barFont]
-        }
-        self.navigationController!.navigationBar.barTintColor = UIColor(red: 242.0/255.0, green:
-            116.0/255.0, blue: 119.0/255.0, alpha: 1.0)
-
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.allowsEditing = true
-                imagePicker.sourceType = .photoLibrary
-                imagePicker.delegate = self 
-                self.present(imagePicker, animated: true, completion: nil)
-            }
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    // CHECK Fields completed 
+    // Check selected YES,NO button
     @IBAction func selectBeenHereField(sender: UIButton) {
 
         switch sender.tag {
@@ -67,15 +40,20 @@ class AddRestaurantController: UITableViewController {
         default: break
         }
     }
+
     @IBAction func saveFilledInformations() {
+
+        // Check required textField has been completed 
+
         guard nameField.text?.isEmpty == false , typeField.text?.isEmpty == false, locationField.text?.isEmpty == false else {
             showAlert(title: "Can't Save", message: "Because name fields is blank. Please note that all fields are required.", style: .alert)
             return
         }
+        // Add new restaurant to Database 
+
         let appDel = (UIApplication.shared.delegate as! AppDelegate)
         let context = appDel.persistentContainer.viewContext
         restaurant = NSEntityDescription.insertNewObject(forEntityName: "Restaurant", into: context) as! Restaurant
-        // Bonus feature : Handle user fill " " and not have any characters. 
         restaurant.name = nameField.text
         restaurant.type = typeField.text
         restaurant.location = locationField.text
@@ -86,15 +64,12 @@ class AddRestaurantController: UITableViewController {
 
         appDel.saveContext()
 
-
-
-        // Handled Filling Informations
-
+        // Segue
         performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
         dismiss(animated: true, completion: nil)
 
     }
-    // Alert Controller
+    // MARK: Alert Controller
     func showAlert(title: String?, message: String?, style: UIAlertControllerStyle) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
@@ -103,7 +78,23 @@ class AddRestaurantController: UITableViewController {
     }
 
 }
+// MARK: UITableView Delegate
+extension AddRestaurantController {
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.allowsEditing = true
+                imagePicker.sourceType = .photoLibrary
+                imagePicker.delegate = self
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+}
 // MARK:  UIImagePicker PROTOCOLS
 extension AddRestaurantController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
