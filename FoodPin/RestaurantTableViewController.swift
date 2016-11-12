@@ -21,16 +21,36 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         configureUI()
 
     }
+
+
+    // MARK: Walkthrough Page Controller
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // Check viewd Walkthrough
+        let defaults = UserDefaults.standard
+        let hasViewedWalkthrough = defaults.bool(forKey: "hasViewedWalkthrough")
+        if hasViewedWalkthrough {
+            return
+        }
+
+        // Present Walkthrough
+        if let pageViewController = storyboard?.instantiateViewController(withIdentifier: "WalkthroughController"){
+            present(pageViewController, animated: true, completion: nil)
+        }
+
+    }
+
     // MARK: - Configure Hide - Show Navigation Bar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnSwipe = true
     }
+
 
     // MARK: - Configure UI
     func configureUI(){
-        // Navigation 
-            title = "FoodPin"
+      
         // Table View
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -75,6 +95,7 @@ extension RestaurantTableViewController {
         //  TO Detail View Controller
         let detailController = storyboard?.instantiateViewController(withIdentifier: "detailView") as! DetailViewController
         detailController.restaurant = (dataSource.searchController.isActive) ? dataSource.searchResults[indexPath.row] : dataSource.resultController.object(at: indexPath)
+        detailController.hidesBottomBarWhenPushed = true 
         navigationController?.pushViewController(detailController, animated: true)
     }
 

@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        // Change the status bar's appearance
+
         UINavigationBar.appearance().barTintColor = UIColor(red: 242.0/255.0, green: 116.0/255.0, blue: 119.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor.white
 
@@ -24,9 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName:barFont]
         }
 
-        // Change the status bar's appearance
         UIApplication.shared.statusBarStyle = .lightContent
 
+        // Change Tab bar 's appearance
+        UITabBar.appearance().tintColor = UIColor(red: 244.0/255.0, green: 136.0/255.0, blue: 139.0/255.0, alpha: 1.0)
+        UITabBar.appearance().barTintColor = UIColor.white
+        UITabBar.appearance().tintColor = UIColor.white
+        UITabBar.appearance().selectionIndicatorImage = UIImage(named: "tabitem-selected")
+        
         return true
     }
 
