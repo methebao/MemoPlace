@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import FirebaseDatabase
 
 extension Restaurant {
 
@@ -18,6 +18,7 @@ extension Restaurant {
         request.sortDescriptors = [sortDescriptor]
         return request
     }
+
 
     @NSManaged public var name: String?
     @NSManaged public var type: String?

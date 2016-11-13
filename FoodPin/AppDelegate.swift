@@ -8,12 +8,16 @@
 
 import UIKit
 import CoreData
-
+import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    override init() {
+        super.init()
+        // Firebase Configure
+        FIRApp.configure()
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -33,7 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().tintColor = UIColor.white
         UITabBar.appearance().selectionIndicatorImage = UIImage(named: "tabitem-selected")
-        
+
+
+
         return true
     }
 
