@@ -11,7 +11,7 @@ import FirebaseDatabase
 class DiscoverTableViewController: UITableViewController {
 
     var places: [RestaurantFB] = []
-    
+    let refreshDataControl = UIRefreshControl()
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
@@ -19,12 +19,25 @@ class DiscoverTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = 100.0
         loadingIndicator()
+        refreshData()
+        fetchRestaurantDataFromFireBase()
+
+        }
+
+    func fetchRestaurantDataFromFireBase(){
+        // Remove all existing data before fetching new data
+        places.removeAll()
+        tableView.reloadData()
+
+        // Fetching data from FireBase 
+        
         FIRDatabase.database().reference().child("Place").observe(.childAdded, with: {
             snapshot in
-                let place = RestaurantFB(snapshot: snapshot)
-                self.places.append(place)
+            let place = RestaurantFB(snapshot: snapshot)
+            self.places.append(place)
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
+                self.refreshDataControl.endRefreshing()
                 self.tableView.reloadData()
             }
         })
@@ -37,6 +50,13 @@ class DiscoverTableViewController: UITableViewController {
         indicator.center = view.center
         view.addSubview(indicator)
         indicator.startAnimating()
+    }
+    // Refresh Control
+    func refreshData() {
+        refreshDataControl.backgroundColor = UIColor.white
+        refreshDataControl.tintColor = UIColor.gray
+        refreshDataControl.addTarget(self, action: #selector(self.fetchRestaurantDataFromFireBase), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshDataControl)
     }
 
 
@@ -64,3 +84,6 @@ class DiscoverTableViewController: UITableViewController {
     }
 
 }
+
+
+
