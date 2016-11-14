@@ -23,6 +23,7 @@
 		7F245A091DD86BBF00AC40CD /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F245A081DD86BBF00AC40CD /* DiscoverTableViewController.swift */; };
 		7F245A0C1DD87A1C00AC40CD /* RestaurantFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F245A0B1DD87A1C00AC40CD /* RestaurantFB.swift */; };
 		7F245A0E1DD8AA0B00AC40CD /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F245A0D1DD8AA0B00AC40CD /* DiscoverTableViewCell.swift */; };
+		7F245A111DD933D700AC40CD /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F245A101DD933D700AC40CD /* Extension.swift */; };
 		7F8F0CB41DD1BAA00028B2B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F0CB31DD1BAA00028B2B6 /* AppDelegate.swift */; };
 		7F8F0CB91DD1BAA00028B2B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8F0CB71DD1BAA00028B2B6 /* Main.storyboard */; };
 		7F8F0CBE1DD1BAA00028B2B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8F0CBC1DD1BAA00028B2B6 /* LaunchScreen.storyboard */; };
@@ -56,6 +57,7 @@
 		7F245A0A1DD86F3100AC40CD /* FoodPin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FoodPin.entitlements; sourceTree = "<group>"; };
 		7F245A0B1DD87A1C00AC40CD /* RestaurantFB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantFB.swift; sourceTree = "<group>"; };
 		7F245A0D1DD8AA0B00AC40CD /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
+		7F245A101DD933D700AC40CD /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		7F8F0CB01DD1BAA00028B2B6 /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8F0CB31DD1BAA00028B2B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F8F0CB81DD1BAA00028B2B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -157,6 +159,14 @@
 			name = Discover;
 			sourceTree = "<group>";
 		};
+		7F245A0F1DD933C100AC40CD /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				7F245A101DD933D700AC40CD /* Extension.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 		7F8F0CA71DD1BAA00028B2B6 = {
 			isa = PBXGroup;
 			children = (
@@ -179,7 +189,7 @@
 		7F8F0CB21DD1BAA00028B2B6 /* FoodPin */ = {
 			isa = PBXGroup;
 			children = (
-				7F245A0A1DD86F3100AC40CD /* FoodPin.entitlements */,
+				7F245A0F1DD933C100AC40CD /* Helper */,
 				7F8F0CC71DD1C4190028B2B6 /* Model */,
 				7F93F1D21DD2B76E0026B113 /* View */,
 				7F93F1D01DD2B7530026B113 /* Controller */,
@@ -216,6 +226,7 @@
 		7F93F1D11DD2B75E0026B113 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				7F245A0A1DD86F3100AC40CD /* FoodPin.entitlements */,
 				7F93F1D51DD2D4270026B113 /* Assets.xcassets */,
 				7F8F0CB31DD1BAA00028B2B6 /* AppDelegate.swift */,
 				7F8F0CBF1DD1BAA00028B2B6 /* Info.plist */,
@@ -398,6 +409,7 @@
 				7F93F1CF1DD2B74E0026B113 /* DetailViewCell.swift in Sources */,
 				7F1CDB6A1DD5BA9500E02C62 /* RestaurantDataSource.swift in Sources */,
 				7F1CDB6C1DD5FE1100E02C62 /* RestaurantFetchResultController.swift in Sources */,
+				7F245A111DD933D700AC40CD /* Extension.swift in Sources */,
 				7F1CDB661DD57C0C00E02C62 /* FoodPin.xcdatamodeld in Sources */,
 				7F245A0C1DD87A1C00AC40CD /* RestaurantFB.swift in Sources */,
 				7F104C581DD7096C009B2F65 /* WalkthroughContentViewController.swift in Sources */,

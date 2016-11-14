@@ -56,16 +56,7 @@ class DiscoverTableViewController: UITableViewController {
         cell.typeLabel.text = places[indexPath.row].type
         
         if let imageURL = places[indexPath.row].image {
-            let url = URL(string: imageURL)
-            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-                if error != nil {
-                    print(error)
-                    return
-                }
-                DispatchQueue.main.async {
-                    cell.imgView?.image = UIImage(data: data!)
-                }
-            }).resume()
+            cell.imgView.loadImageUsingCacheWithURL(imageURL: imageURL)
         }
         
        // cell.imageView?.image = UIImage(named: "restaurantA")
