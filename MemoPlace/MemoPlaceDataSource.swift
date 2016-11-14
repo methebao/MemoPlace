@@ -1,6 +1,6 @@
 //
 //  RestaurantDataSource.swift
-//  FoodPin
+//  MemoPlace
 //
 //  Created by The Bao on 11/11/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -9,24 +9,24 @@
 import Foundation
 import UIKit
 import CoreData
-class RestaurantDataSource: NSObject, UITableViewDataSource {
+class MemoPlaceDataSource: NSObject, UITableViewDataSource {
     private let tableView: UITableView
-    
+
     var searchController: UISearchController!
-    
-    var searchResults: [Restaurant] = []
+
+    var searchResults: [MemoPlace] = []
 
     let managedObjectcontext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-    lazy var resultController: RestaurantFetchResultController = {
-        let controller = RestaurantFetchResultController(managedObjectContext: self.managedObjectcontext, withTableView: self.tableView)
+    lazy var resultController: MemoPlaceFetchResultController = {
+        let controller = MemoPlaceFetchResultController(managedObjectContext: self.managedObjectcontext, withTableView: self.tableView)
         return controller
     }()
-    
+
     init(tableView: UITableView) {
         self.tableView = tableView
     }
-    func object(at indexPath: IndexPath) -> Restaurant {
+    func object(at indexPath: IndexPath) -> MemoPlace {
         return resultController.object(at: indexPath)
     }
 
@@ -46,7 +46,7 @@ class RestaurantDataSource: NSObject, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let restaurant = (searchController.isActive) ? searchResults[indexPath.row] : resultController.object(at: indexPath)
-        let restaurantCell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantViewCell
+        let restaurantCell = tableView.dequeueReusableCell(withIdentifier: "MemoPlaceCell", for: indexPath) as! MemoPlaceViewCell
 
         restaurantCell.imgView.image = UIImage(data: restaurant.image as! Data)
         restaurantCell.nameLabel.text = restaurant.name
@@ -57,17 +57,17 @@ class RestaurantDataSource: NSObject, UITableViewDataSource {
 
         return restaurantCell
     }
-   
+
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if searchController.isActive {
-            return false 
+            return false
         }
         return true
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-
+        
     }
-
-  
+    
+    
 }

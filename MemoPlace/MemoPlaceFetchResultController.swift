@@ -1,6 +1,6 @@
 //
 //  RestaurantFetchResultController.swift
-//  FoodPin
+//  MemoPlace
 //
 //  Created by The Bao on 11/11/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -9,12 +9,12 @@
 import Foundation
 import CoreData
 import UIKit
-class RestaurantFetchResultController: NSFetchedResultsController<Restaurant>,NSFetchedResultsControllerDelegate {
+class MemoPlaceFetchResultController: NSFetchedResultsController<MemoPlace>,NSFetchedResultsControllerDelegate {
     private let tableView: UITableView
 
     init(managedObjectContext: NSManagedObjectContext, withTableView tableView: UITableView) {
         self.tableView = tableView
-        super.init(fetchRequest: Restaurant.fetchRequest(), managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        super.init(fetchRequest: MemoPlace.fetchRequest(), managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         self.delegate = self
         tryFetch()
     }
@@ -27,7 +27,7 @@ class RestaurantFetchResultController: NSFetchedResultsController<Restaurant>,NS
         }
     }
     // NSFetchResultController DELEGATE
-    
+
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }

@@ -1,6 +1,6 @@
 //
 //  Extension.swift
-//  FoodPin
+//  MemoPlace
 //
 //  Created by The Bao on 11/14/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -24,7 +24,7 @@ extension UIImageView {
         let url = URL(string: imageURL)
         URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             if error != nil {
-                print(error)
+                print("Unsolved Error: \(error), \(error?.localizedDescription)")
                 return
             }
             DispatchQueue.main.async {

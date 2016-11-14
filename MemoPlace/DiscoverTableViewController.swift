@@ -1,6 +1,6 @@
 //
 //  DiscoverTableViewController.swift
-//  FoodPin
+//  MemoPlace
 //
 //  Created by The Bao on 11/13/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 class DiscoverTableViewController: UITableViewController {
 
-    var places: [RestaurantFB] = []
+    var places: [MemoPlaceFB] = []
     let refreshDataControl = UIRefreshControl()
     @IBOutlet weak var indicator: UIActivityIndicatorView!
 
@@ -32,7 +32,7 @@ class DiscoverTableViewController: UITableViewController {
         
         FIRDatabase.database().reference().child("Place").observe(.childAdded, with: {
             snapshot in
-            let place = RestaurantFB(snapshot: snapshot)
+            let place = MemoPlaceFB(snapshot: snapshot)
             self.places.append(place)
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
@@ -44,8 +44,8 @@ class DiscoverTableViewController: UITableViewController {
     }
     // MARK: Configure UI
     func configureUI(){
-        tableView.estimatedRowHeight = 100.0
-        tableView.rowHeight = 100.0
+        tableView.estimatedRowHeight = 120.0
+        tableView.rowHeight = 120.0
         loadingIndicator()
         refreshData()
     }
@@ -88,6 +88,8 @@ extension DiscoverTableViewController {
 
         if let imageURL = places[indexPath.row].image {
             cell.imgView.loadImageUsingCacheWithURL(imageURL: imageURL)
+            
+
         }
         return cell
     }

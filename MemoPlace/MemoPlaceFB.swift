@@ -1,6 +1,6 @@
 //
-//  RestaurantFB.swift
-//  FoodPin
+//  MemoPlaceFB.swift
+//  MemoPlace
 //
 //  Created by The Bao on 11/13/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 
-class RestaurantFB {
+class MemoPlaceFB {
     var name: String!
     var type: String!
     var location: String!

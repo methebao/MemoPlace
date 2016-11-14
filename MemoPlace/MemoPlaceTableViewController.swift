@@ -1,6 +1,6 @@
 //
 //  RestaurantTableViewController.swift
-//  FoodPin
+//  MemoPlace
 //
 //  Created by The Bao on 11/8/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -8,10 +8,10 @@
 
 import UIKit
 import CoreData
-class RestaurantTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class MemoPlaceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    lazy var dataSource: RestaurantDataSource = {
-        return RestaurantDataSource(tableView: self.tableView)
+    lazy var dataSource: MemoPlaceDataSource = {
+        return MemoPlaceDataSource(tableView: self.tableView)
     }()
 
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 
     // MARK: - Configure UI
     func configureUI(){
-      
+
         // Table View
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -60,18 +60,19 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         dataSource.searchController.hidesNavigationBarDuringPresentation = false
         dataSource.searchController.dimsBackgroundDuringPresentation = false
         dataSource.searchController.searchBar.barTintColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
-            dataSource.searchController.searchBar.tintColor = UIColor.white
-        dataSource.searchController.searchBar.placeholder = "Search restaurants..."
+        dataSource.searchController.searchBar.tintColor = UIColor.white
+        dataSource.searchController.searchBar.placeholder = "Search memo places..."
     }
 
     // MARK: Search Bar
     func filterContentForSearchText(searchText: String) {
-        guard let restaurants = dataSource.resultController.fetchedObjects else { return }
-        dataSource.searchResults = restaurants.filter({ (restaurant: Restaurant) -> Bool in
-            if ((restaurant.name?.range(of: searchText, options: .caseInsensitive)) != nil) {
+        guard let memoPlaces = dataSource.resultController.fetchedObjects else { return }
+
+        dataSource.searchResults = memoPlaces.filter({ (memoPlace: MemoPlace) -> Bool in
+            if ((memoPlace.name?.range(of: searchText, options: .caseInsensitive)) != nil) {
                 return true
             }
-            if ((restaurant.location?.range(of: searchText, options: .caseInsensitive)) != nil) {
+            if ((memoPlace.location?.range(of: searchText, options: .caseInsensitive)) != nil) {
                 return true
             }
             return false
@@ -81,7 +82,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
 
 // MARK: SEGUES
 
-extension RestaurantTableViewController {
+extension MemoPlaceTableViewController {
 
     @IBAction func unwindToHomeScreen(_segue: UIStoryboardSegue){
     }
@@ -89,20 +90,20 @@ extension RestaurantTableViewController {
 
 // MARK: TableView DELEGATE
 
-extension RestaurantTableViewController {
+extension MemoPlaceTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //  TO Detail View Controller
         let detailController = storyboard?.instantiateViewController(withIdentifier: "detailView") as! DetailViewController
-        detailController.restaurant = (dataSource.searchController.isActive) ? dataSource.searchResults[indexPath.row] : dataSource.resultController.object(at: indexPath)
-        detailController.hidesBottomBarWhenPushed = true 
+        detailController.memoPlace = (dataSource.searchController.isActive) ? dataSource.searchResults[indexPath.row] : dataSource.resultController.object(at: indexPath)
+        detailController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(detailController, animated: true)
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
         let restaurant = dataSource.resultController.object(at: indexPath)
-        
+
         // Social Sharing Button
         let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Share", handler: { (action, indexPath) -> Void in
 
@@ -125,13 +126,13 @@ extension RestaurantTableViewController {
         // Set the button color
         shareAction.backgroundColor = UIColor.blue
         deleteAction.backgroundColor = UIColor.red
-        
+
         return [deleteAction, shareAction]
     }
 
 }
 //MARK: Search Controller DELEGATES
-extension RestaurantTableViewController: UISearchResultsUpdating {
+extension MemoPlaceTableViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {

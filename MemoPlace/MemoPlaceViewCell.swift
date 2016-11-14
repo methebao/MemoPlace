@@ -1,23 +1,23 @@
 //
-//  DiscoverTableViewCell.swift
-//  FoodPin
+//  RestaurantViewCell.swift
+//  MemoPlace
 //
-//  Created by The Bao on 11/13/16.
+//  Created by The Bao on 11/9/16.
 //  Copyright © 2016 The Bao. All rights reserved.
 //
 
 import UIKit
 
-class DiscoverTableViewCell: UITableViewCell {
+class MemoPlaceViewCell: UITableViewCell {
 
     @IBOutlet weak var imgView: UIImageView!
 
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     @IBOutlet weak var typeLabel: UILabel!
 
     @IBOutlet weak var locationLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,5 +28,5 @@ class DiscoverTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

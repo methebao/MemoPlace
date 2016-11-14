@@ -1,6 +1,6 @@
 //
-//  Restaurant+CoreDataProperties.swift
-//  FoodPin
+//  MemoPlace+CoreDataProperties.swift
+//  MemoPlace
 //
 //  Created by The Bao on 11/11/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -8,13 +8,12 @@
 
 import Foundation
 import CoreData
-import FirebaseDatabase
 
-extension Restaurant {
+extension MemoPlace {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Restaurant> {
-        let request = NSFetchRequest<Restaurant>(entityName: "Restaurant")
-        let sortDescriptor = NSSortDescriptor(key: #keyPath(Restaurant.name), ascending: true)
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<MemoPlace> {
+        let request = NSFetchRequest<MemoPlace>(entityName: "MemoPlace")
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(MemoPlace.name), ascending: true)
         request.sortDescriptors = [sortDescriptor]
         return request
     }
@@ -27,5 +26,5 @@ extension Restaurant {
     @NSManaged public var image: NSData?
     @NSManaged public var isVisited: Bool
     @NSManaged public var rating: String?
-
+    
 }

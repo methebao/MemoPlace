@@ -1,6 +1,6 @@
 //
-//  AddRestaurantController.swift
-//  FoodPin
+//  AddMemoPlaceController.swift
+//  MemoPlace
 //
 //  Created by The Bao on 11/9/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-class AddRestaurantController: UITableViewController {
+class AddMemoPlaceController: UITableViewController {
 
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var yesButton: UIButton!
@@ -16,8 +16,9 @@ class AddRestaurantController: UITableViewController {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var typeField: UITextField!
     @IBOutlet weak var locationField: UITextField!
+    @IBOutlet weak var phoneField: UITextField!
     var isVisited = true
-    var restaurant: Restaurant!
+    var memoPlace: MemoPlace!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,24 +44,25 @@ class AddRestaurantController: UITableViewController {
 
     @IBAction func saveFilledInformations() {
 
-        // Check required textField has been completed 
+        // Check required textField has been completed
 
         guard nameField.text?.isEmpty == false , typeField.text?.isEmpty == false, locationField.text?.isEmpty == false else {
             showAlert(title: "Can't Save", message: "Because name fields is blank. Please note that all fields are required.", style: .alert)
             return
         }
-        // Add new restaurant to Database 
+        // Add new restaurant to Database
 
         let appDel = (UIApplication.shared.delegate as! AppDelegate)
         let context = appDel.persistentContainer.viewContext
-        restaurant = NSEntityDescription.insertNewObject(forEntityName: "Restaurant", into: context) as! Restaurant
-        restaurant.name = nameField.text
-        restaurant.type = typeField.text
-        restaurant.location = locationField.text
+        memoPlace = NSEntityDescription.insertNewObject(forEntityName: "MemoPlace", into: context) as! MemoPlace
+        memoPlace.name = nameField.text
+        memoPlace.type = typeField.text
+        memoPlace.location = locationField.text
+        memoPlace.phoneNumber = phoneField.text
         if let image = UIImagePNGRepresentation((imgView.image)!) {
-            restaurant.image = image as NSData?
+            memoPlace.image = image as NSData?
         }
-        restaurant.isVisited = isVisited
+        memoPlace.isVisited = isVisited
 
         appDel.saveContext()
 
@@ -79,7 +81,7 @@ class AddRestaurantController: UITableViewController {
 
 }
 // MARK: UITableView Delegate
-extension AddRestaurantController {
+extension AddMemoPlaceController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
@@ -96,14 +98,14 @@ extension AddRestaurantController {
 
 }
 // MARK:  UIImagePicker PROTOCOLS
-extension AddRestaurantController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+extension AddMemoPlaceController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
         imgView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         imgView.contentMode = UIViewContentMode.scaleAspectFill
         imgView.clipsToBounds = true
 
-        // Auto Layout Constraints 
+        // Auto Layout Constraints
 
         let leadingConstraint = NSLayoutConstraint(item: imgView, attribute: .leading, relatedBy: .equal, toItem: imgView.superview, attribute: .leading, multiplier: 1.0, constant: 0)
         let trailingConstraint = NSLayoutConstraint(item: imgView, attribute: .trailing, relatedBy: .equal, toItem: imgView.superview, attribute: .trailing, multiplier: 1.0, constant: 0)
@@ -111,10 +113,10 @@ extension AddRestaurantController: UIImagePickerControllerDelegate,UINavigationC
         let bottomConstraint = NSLayoutConstraint(item: imgView, attribute: .bottom, relatedBy: .equal, toItem: imgView.superview, attribute: .bottom, multiplier: 1.0, constant: 0)
         let constraints: [NSLayoutConstraint] = [leadingConstraint,trailingConstraint,topConstraint,bottomConstraint]
         _ = constraints.map { $0.isActive = true }
-
-
+        
+        
         dismiss(animated: true, completion: nil)
-
+        
     }
 }
 

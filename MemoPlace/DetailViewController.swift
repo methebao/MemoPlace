@@ -1,6 +1,6 @@
 //
 //  DetailViewController.swift
-//  FoodPin
+//  MemoPlace
 //
 //  Created by The Bao on 11/8/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -9,14 +9,14 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    
+
     @IBOutlet weak var tableView: UITableView!
 
-    @IBOutlet weak var restaurantImageView: UIImageView!
+    @IBOutlet weak var imgView: UIImageView!
 
     @IBOutlet var ratingButton:UIButton!
 
-    var restaurant: Restaurant?
+    var memoPlace: MemoPlace?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +25,8 @@ class DetailViewController: UIViewController {
 
     // MARK: - Configure UI
     func configureUI(){
-        guard let restaurant = restaurant else { return }
-        restaurantImageView.image = UIImage(data: restaurant.image as! Data)
+        guard let memoPlace = memoPlace else { return }
+        imgView.image = UIImage(data: memoPlace.image as! Data)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -61,22 +61,22 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let detailCell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailViewCell
         detailCell.backgroundColor = UIColor.white
-        guard let restaurant = restaurant else { return detailCell }
+        guard let memoPlace = memoPlace else { return detailCell }
         switch indexPath.row {
         case 0: detailCell.fieldLabel.text = "Name"
-                detailCell.valueLabel.text = restaurant.name
+        detailCell.valueLabel.text = memoPlace.name
         case 1: detailCell.fieldLabel.text = "Type"
-        detailCell.valueLabel.text = restaurant.type
+        detailCell.valueLabel.text = memoPlace.type
         case 2: detailCell.fieldLabel.text = "Location"
-        detailCell.valueLabel.text = restaurant.location
+        detailCell.valueLabel.text = memoPlace.location
         case 3: detailCell.fieldLabel.text = "Phone"
-        detailCell.valueLabel.text = restaurant.phoneNumber
+        detailCell.valueLabel.text = memoPlace.phoneNumber
         case 4: detailCell.fieldLabel.text = "Rating"
-            detailCell.valueLabel.text = restaurant.rating
+        detailCell.valueLabel.text = memoPlace.rating
         case 5: detailCell.fieldLabel.text = "Been here"
-            detailCell.valueLabel.text = (restaurant.isVisited) ? "Yes, I've been here before": "No"
+        detailCell.valueLabel.text = (memoPlace.isVisited) ? "Yes, I've been here before": "No"
         default: detailCell.fieldLabel.text = ""
-                detailCell.valueLabel.text = ""
+        detailCell.valueLabel.text = ""
         }
         return detailCell
     }
@@ -88,7 +88,7 @@ extension DetailViewController {
     @IBAction func close(_ segue: UIStoryboardSegue) {
         if let reviewViewController = segue.source as? ReviewViewController {
             if let rating = reviewViewController.rating {
-                restaurant?.rating = rating
+                memoPlace?.rating = rating
                 ratingButton.setImage(UIImage(named: rating), for: UIControlState())
                 tableView.reloadData()
             }
@@ -98,7 +98,7 @@ extension DetailViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMap" {
             let mapController = segue.destination as! MapViewController
-            mapController.restaurant = restaurant
+            mapController.memoPlace = memoPlace
         }
     }
 }

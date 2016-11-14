@@ -1,6 +1,6 @@
 //
 //  DiscoverTableViewCell.swift
-//  FoodPin
+//  MemoPlace
 //
 //  Created by The Bao on 11/13/16.
 //  Copyright © 2016 The Bao. All rights reserved.
@@ -21,7 +21,7 @@ class DiscoverTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
+        }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
