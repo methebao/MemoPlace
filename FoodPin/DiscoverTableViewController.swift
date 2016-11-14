@@ -16,13 +16,12 @@ class DiscoverTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = 100.0
-        tableView.rowHeight = 100.0
-        loadingIndicator()
-        refreshData()
+        configureUI()
         fetchRestaurantDataFromFireBase()
 
         }
+
+    // MARK: Fetching Data 
 
     func fetchRestaurantDataFromFireBase(){
         // Remove all existing data before fetching new data
@@ -43,7 +42,15 @@ class DiscoverTableViewController: UITableViewController {
         })
 
     }
+    // MARK: Configure UI
+    func configureUI(){
+        tableView.estimatedRowHeight = 100.0
+        tableView.rowHeight = 100.0
+        loadingIndicator()
+        refreshData()
+    }
 
+    // Loading Indicator
     func loadingIndicator() {
 
         indicator.hidesWhenStopped = true
@@ -60,7 +67,10 @@ class DiscoverTableViewController: UITableViewController {
     }
 
 
-    // MARK: - Table view data source
+}
+
+// MARK: UITableView DataSource 
+extension DiscoverTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -71,19 +81,15 @@ class DiscoverTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "discoverCell", for: indexPath) as! DiscoverTableViewCell
+
         cell.nameLabel?.text = places[indexPath.row].name
         cell.locationLabel.text = places[indexPath.row].location
         cell.typeLabel.text = places[indexPath.row].type
-        
+
         if let imageURL = places[indexPath.row].image {
             cell.imgView.loadImageUsingCacheWithURL(imageURL: imageURL)
         }
-        
-       // cell.imageView?.image = UIImage(named: "restaurantA")
         return cell
     }
-
 }
-
-
 
