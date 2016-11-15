@@ -32,13 +32,20 @@ extension MapViewController: MKMapViewDelegate {
         }
         annotationView?.leftCalloutAccessoryView = leftIconView
         annotationView?.pinTintColor = UIColor.red
+
+        // Add action to move on route table view 
+        annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+
         return annotationView
     }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
         let render = MKPolylineRenderer(overlay: overlay)
-        render.strokeColor = UIColor.blue
+        render.strokeColor = (currentTranspotType == .automobile) ? UIColor.blue : UIColor.orange
         render.lineWidth = 3.0
         return render
+    }
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        performSegue(withIdentifier: "showSteps", sender: view)
     }
 }

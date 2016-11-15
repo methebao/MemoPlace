@@ -16,15 +16,21 @@ class MapViewController: UIViewController {
     var memoPlace: MemoPlace?
     let locationManager = CLLocationManager()
     var currentPlacemark: CLPlacemark?
+    var currentTranspotType = MKDirectionsTransportType.automobile
+    var currentRoute: MKRoute?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        segmentedControl.isHidden = true
+
         convertAddressToCoordinate()
         mapView.delegate = self
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
             mapView.showsUserLocation = true
         }
+        segmentedControl.addTarget(self, action: #selector(MapViewController.showDirection), for: .valueChanged)
 
     }
 
@@ -60,6 +66,14 @@ class MapViewController: UIViewController {
     // MARK: showDirection
     @IBAction func showDirection() {
 
+        segmentedControl.isHidden = false
+
+        switch segmentedControl.selectedSegmentIndex {
+        case 0: currentTranspotType = .automobile
+        case 1: currentTranspotType = .walking
+        default: break
+        }
+
         guard let currentPlacemark = currentPlacemark else {
             return
         }
@@ -69,7 +83,7 @@ class MapViewController: UIViewController {
         directionRequest.source = MKMapItem.forCurrentLocation()
         let destinationPlacemark = MKPlacemark(placemark: currentPlacemark)
         directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
-        directionRequest.transportType = .automobile
+        directionRequest.transportType = currentTranspotType
 
         // Calculate the Direction
         let directions = MKDirections(request: directionRequest)
@@ -81,14 +95,28 @@ class MapViewController: UIViewController {
                 }
                 return
             }
+
             let route = routeResponse.routes[0]
-            let rect = route.polyline.boundingMapRect
-            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+            // Update current route
+            self.currentRoute = route
+
             self.mapView.removeOverlays(self.mapView.overlays)
             self.mapView.add(route.polyline, level: .aboveRoads)
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
 
         }
 
+    }
+    // MARK: SEGUES 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showSteps" {
+            let routeController = segue.destination as! RouteTableViewController
+            if let steps = currentRoute?.steps {
+                print(steps)
+                routeController.routeSteps = steps
+            }
+        }
     }
 }
 
