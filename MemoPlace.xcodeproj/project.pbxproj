@@ -37,6 +37,7 @@
 		7F93F1E11DD36E8E0026B113 /* AddMemoPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F93F1E01DD36E8E0026B113 /* AddMemoPlaceController.swift */; };
 		7FC31E321DDB2BBB0007FC51 /* MapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC31E311DDB2BBB0007FC51 /* MapViewDelegate.swift */; };
 		7FC31E341DDB38250007FC51 /* RouteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC31E331DDB38250007FC51 /* RouteTableViewController.swift */; };
+		7FC31E371DDB42600007FC51 /* mapView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FC31E351DDB42600007FC51 /* mapView.storyboard */; };
 		8918D07A0539EE96D69253EB /* Pods_MemoPlace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B9AF3B12C7C4E5C5B6DE8A /* Pods_MemoPlace.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		7F93F1E01DD36E8E0026B113 /* AddMemoPlaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMemoPlaceController.swift; sourceTree = "<group>"; };
 		7FC31E311DDB2BBB0007FC51 /* MapViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDelegate.swift; sourceTree = "<group>"; };
 		7FC31E331DDB38250007FC51 /* RouteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteTableViewController.swift; sourceTree = "<group>"; };
+		7FC31E361DDB42600007FC51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/mapView.storyboard; sourceTree = "<group>"; };
 		D0B9AF3B12C7C4E5C5B6DE8A /* Pods_MemoPlace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoPlace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0BBEE2F4921CFBFEE40C88 /* Pods-MemoPlace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoPlace.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemoPlace/Pods-MemoPlace.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -256,6 +258,7 @@
 			children = (
 				7F8F0CBC1DD1BAA00028B2B6 /* LaunchScreen.storyboard */,
 				7F8F0CB71DD1BAA00028B2B6 /* Main.storyboard */,
+				7FC31E351DDB42600007FC51 /* mapView.storyboard */,
 				7F104C5E1DD727F8009B2F65 /* discover.storyboard */,
 				7F104C5B1DD727CF009B2F65 /* about.storyboard */,
 			);
@@ -345,6 +348,7 @@
 				7F8F0CBE1DD1BAA00028B2B6 /* LaunchScreen.storyboard in Resources */,
 				7F93F1D61DD2D4270026B113 /* Assets.xcassets in Resources */,
 				7F104C5F1DD727F8009B2F65 /* discover.storyboard in Resources */,
+				7FC31E371DDB42600007FC51 /* mapView.storyboard in Resources */,
 				7F104C5D1DD727CF009B2F65 /* about.storyboard in Resources */,
 				7F8F0CB91DD1BAA00028B2B6 /* Main.storyboard in Resources */,
 				7F245A061DD8627200AC40CD /* GoogleService-Info.plist in Resources */,
@@ -457,6 +461,14 @@
 				7F8F0CBD1DD1BAA00028B2B6 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7FC31E351DDB42600007FC51 /* mapView.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FC31E361DDB42600007FC51 /* Base */,
+			);
+			name = mapView.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

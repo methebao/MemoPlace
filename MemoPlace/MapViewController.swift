@@ -22,17 +22,24 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        segmentedControl.isHidden = true
-
+        configSegmentedControl()
         convertAddressToCoordinate()
         mapView.delegate = self
+
+        // Check location permission
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
             mapView.showsUserLocation = true
         }
-        segmentedControl.addTarget(self, action: #selector(MapViewController.showDirection), for: .valueChanged)
 
     }
+    //MARK: Segmented Control 
+    func configSegmentedControl(){
+        segmentedControl.isHidden = true
+        segmentedControl.addTarget(self, action: #selector(MapViewController.showDirection), for: .valueChanged)
+    }
+
+   
 
     // MARK: Address to Coordinate
     func convertAddressToCoordinate() {
@@ -108,7 +115,39 @@ class MapViewController: UIViewController {
         }
 
     }
-    // MARK: SEGUES 
+    // MARK: Nearby 
+    @IBAction func showNearby() {
+        let searchRequest = MKLocalSearchRequest()
+        searchRequest.naturalLanguageQuery = memoPlace?.type
+        searchRequest.region = mapView.region
+
+        let localSearch = MKLocalSearch(request: searchRequest)
+        localSearch.start { (searchResponse, error) in
+            guard let searchResponse = searchResponse else {
+                if let error = error {
+                    print("Unsolved Error: \(error), \(error.localizedDescription)")
+                }
+                return
+            }
+            let mapItems = searchResponse.mapItems
+            var nearByAnnotation = [MKAnnotation]()
+            if mapItems.count > 0 {
+                for item in mapItems {
+                    // Add annotation
+                    let annotation = MKPointAnnotation()
+                    annotation.title = item.name
+                    annotation.subtitle = item.phoneNumber
+                    if let location = item.placemark.location {
+                        annotation.coordinate = location.coordinate
+                    }
+                    nearByAnnotation.append(annotation)
+                }
+            }
+            self.mapView.showAnnotations(nearByAnnotation, animated: true)
+        }
+    }
+
+    // MARK: Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSteps" {
             let routeController = segue.destination as! RouteTableViewController
@@ -118,5 +157,6 @@ class MapViewController: UIViewController {
             }
         }
     }
+
 }
 

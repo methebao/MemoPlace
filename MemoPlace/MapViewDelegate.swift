@@ -25,19 +25,30 @@ extension MapViewController: MKMapViewDelegate {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
         }
-        let leftIconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 53, height: 53))
+        // Check current placemark == annotation -> custom view annotation
+        if let currentPlaceMarkCoordinate = currentPlacemark?.location?.coordinate {
+            if currentPlaceMarkCoordinate.latitude == annotation.coordinate.latitude && currentPlaceMarkCoordinate.longitude == annotation.coordinate.longitude{
 
-        if let restaurantImage = memoPlace?.image {
-            leftIconView.image = UIImage(data: restaurantImage as Data)
+                let leftIconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 53, height: 53))
+
+                if let restaurantImage = self.memoPlace?.image {
+                    leftIconView.image = UIImage(data: restaurantImage as Data)
+                }
+                annotationView?.leftCalloutAccessoryView = leftIconView
+                annotationView?.pinTintColor = UIColor.red
+
+            } else {
+                annotationView?.pinTintColor = UIColor.orange
+            }
+
         }
-        annotationView?.leftCalloutAccessoryView = leftIconView
-        annotationView?.pinTintColor = UIColor.red
 
         // Add action to move on route table view 
         annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
 
         return annotationView
     }
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
         let render = MKPolylineRenderer(overlay: overlay)
@@ -48,4 +59,5 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         performSegue(withIdentifier: "showSteps", sender: view)
     }
+
 }
