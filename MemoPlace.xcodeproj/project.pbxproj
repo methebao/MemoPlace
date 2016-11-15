@@ -35,6 +35,7 @@
 		7F93F1DB1DD34D6B0026B113 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F93F1DA1DD34D6B0026B113 /* MapKit.framework */; };
 		7F93F1DD1DD350390026B113 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F93F1DC1DD350390026B113 /* MapViewController.swift */; };
 		7F93F1E11DD36E8E0026B113 /* AddMemoPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F93F1E01DD36E8E0026B113 /* AddMemoPlaceController.swift */; };
+		7FC31E321DDB2BBB0007FC51 /* MapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC31E311DDB2BBB0007FC51 /* MapViewDelegate.swift */; };
 		8918D07A0539EE96D69253EB /* Pods_MemoPlace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B9AF3B12C7C4E5C5B6DE8A /* Pods_MemoPlace.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		7F93F1DA1DD34D6B0026B113 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7F93F1DC1DD350390026B113 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7F93F1E01DD36E8E0026B113 /* AddMemoPlaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMemoPlaceController.swift; sourceTree = "<group>"; };
+		7FC31E311DDB2BBB0007FC51 /* MapViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDelegate.swift; sourceTree = "<group>"; };
 		D0B9AF3B12C7C4E5C5B6DE8A /* Pods_MemoPlace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemoPlace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0BBEE2F4921CFBFEE40C88 /* Pods-MemoPlace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoPlace.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemoPlace/Pods-MemoPlace.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				7F93F1DC1DD350390026B113 /* MapViewController.swift */,
+				7FC31E311DDB2BBB0007FC51 /* MapViewDelegate.swift */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				7F104C641DD74B2B009B2F65 /* WebViewController.swift in Sources */,
 				7F104C5A1DD70BD0009B2F65 /* WalkthroughPageViewController.swift in Sources */,
 				7F245A0E1DD8AA0B00AC40CD /* DiscoverTableViewCell.swift in Sources */,
+				7FC31E321DDB2BBB0007FC51 /* MapViewDelegate.swift in Sources */,
 				7F8F0CCB1DD1D2DA0028B2B6 /* DetailViewController.swift in Sources */,
 				7F104C611DD746A7009B2F65 /* AboutViewController.swift in Sources */,
 				7F93F1DD1DD350390026B113 /* MapViewController.swift in Sources */,

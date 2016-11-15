@@ -198,7 +198,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="d0R-ql-xfC" kind="show" identifier="showMap" id="AnI-Qp-u79"/>
+                                    <segue destination="CnB-wa-PCR" kind="presentation" identifier="showMap" id="d7v-nt-xZM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -635,13 +635,33 @@
                             <constraint firstAttribute="trailing" secondItem="Uez-qY-M2C" secondAttribute="trailing" id="j2f-tk-rr5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="11a-d5-NVI">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Direction" id="ThA-bq-7KE">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="showDirection" destination="d0R-ql-xfC" id="i0r-e8-Eum"/>
+                            </connections>
+                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" id="h6G-IN-gmQ">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Car"/>
+                                <segment title="Walking"/>
+                            </segments>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="giF-q5-LMM">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="Uez-qY-M2C" id="iG4-bz-r5N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hj-rP-3ML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4161" y="389"/>
+            <point key="canvasLocation" x="5100" y="388.15592203898052"/>
         </scene>
         <!--Walkthrough Page View Controller-->
         <scene sceneID="wgf-0B-grp">
@@ -804,6 +824,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7aT-UM-r6G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1211" y="806"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sM9-dn-8XP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CnB-wa-PCR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GyV-Qe-ZjT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="d0R-ql-xfC" kind="relationship" relationship="rootViewController" id="38S-rW-LHc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lmg-Q0-r8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4160.8000000000002" y="388.15592203898052"/>
         </scene>
     </scenes>
     <resources>

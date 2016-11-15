@@ -97,8 +97,9 @@ extension DetailViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMap" {
-            let mapController = segue.destination as! MapViewController
-            mapController.memoPlace = memoPlace
+            let destinationController = segue.destination as! UINavigationController
+            let mapViewController = destinationController.childViewControllers.first as! MapViewController
+            mapViewController.memoPlace = memoPlace
         }
     }
 }

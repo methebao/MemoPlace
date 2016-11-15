@@ -8,16 +8,23 @@
 
 import UIKit
 import MapKit
-
+import CoreLocation
 class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     var memoPlace: MemoPlace?
-
+    let locationManager = CLLocationManager()
+    var currentPlacemark: CLPlacemark?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         convertAddressToCoordinate()
-        mapView.delegate = self;
+        mapView.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
+            mapView.showsUserLocation = true
+        }
 
     }
 
@@ -33,7 +40,7 @@ class MapViewController: UIViewController {
             if let placeMarks = placeMarks {
                 // Get first place mark
                 let placeMark = placeMarks[0]
-
+                self.currentPlacemark = placeMark
                 // Add annotation
                 let annotation = MKPointAnnotation()
                 annotation.title = self.memoPlace?.name
@@ -50,30 +57,38 @@ class MapViewController: UIViewController {
             }
         }
     }
-}
-// MARK: MKMapView PROTOCOLS
-extension MapViewController: MKMapViewDelegate {
+    // MARK: showDirection
+    @IBAction func showDirection() {
 
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let identifier = "MemoPlacePin"
-
-        if annotation.isKind(of: MKUserLocation.self){
-            return nil
+        guard let currentPlacemark = currentPlacemark else {
+            return
         }
-        // Reuse the annotation if possible
-        var annotationView: MKPinAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
 
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true
-        }
-        let leftIconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 53, height: 53))
+        let directionRequest = MKDirectionsRequest()
+        // Set the source and destination of the route
+        directionRequest.source = MKMapItem.forCurrentLocation()
+        let destinationPlacemark = MKPlacemark(placemark: currentPlacemark)
+        directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
+        directionRequest.transportType = .automobile
 
-        if let restaurantImage = memoPlace?.image {
-            leftIconView.image = UIImage(data: restaurantImage as Data)
+        // Calculate the Direction
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate { (routeResponse, error) in
+
+            guard let routeResponse = routeResponse else {
+                if let error = error  {
+                    print("Unsolved Error: \(error),\(error.localizedDescription)")
+                }
+                return
+            }
+            let route = routeResponse.routes[0]
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+            self.mapView.removeOverlays(self.mapView.overlays)
+            self.mapView.add(route.polyline, level: .aboveRoads)
+
         }
-        annotationView?.leftCalloutAccessoryView = leftIconView
-        annotationView?.pinTintColor = UIColor.red
-        return annotationView
+
     }
 }
+
