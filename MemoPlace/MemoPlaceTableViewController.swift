@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Social
+
 class MemoPlaceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     lazy var dataSource: MemoPlaceDataSource = {
@@ -105,14 +107,38 @@ extension MemoPlaceTableViewController {
         let restaurant = dataSource.resultController.object(at: indexPath)
 
         // Social Sharing Button
-        let shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Share", handler: { (action, indexPath) -> Void in
+        let twitterAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Twitter", handler: { (action, indexPath) -> Void in
 
-            let defaultText = "Just checking in at " + restaurant.name!
+            guard SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) else {
+                let alertMessage = UIAlertController(title: "Twitter Unavailable",message: "You haven't registered your Twitter account. Please go to Settings > Twitter to create one.", preferredStyle: .alert)
+                    alertMessage.addAction(UIAlertAction(title: "OK", style: .default,
+                                                         handler: nil))
+                self.present(alertMessage, animated: true, completion: nil)
+                return
+            }
+            let tweetComposer = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            tweetComposer?.setInitialText(restaurant.name)
+            tweetComposer?.add(UIImage(data:restaurant.image as! Data))
+            if let tweetComposer = tweetComposer {
+                self.present(tweetComposer, animated: true, completion: nil)
+            }
+        })
 
-            if let imageToShare = UIImage(data: restaurant.image as! Data) {
-                let activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+        let facebookAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Facebook", handler: { (action, indexPath) -> Void in
 
-                self.present(activityController, animated: true, completion: nil)
+            guard SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) else {
+                let alertMessage = UIAlertController(title: "Facebook Unavailable",message: "You haven't registered your Facebook account. Please go to Settings > Facebook to create one.", preferredStyle: .alert)
+                alertMessage.addAction(UIAlertAction(title: "OK", style: .default,
+                                                     handler: nil))
+                self.present(alertMessage, animated: true, completion: nil)
+                return
+            }
+            let facebookComposer = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookComposer?.setInitialText(restaurant.name)
+            facebookComposer?.add(UIImage(data:restaurant.image as! Data))
+            facebookComposer?.add(URL(string: "http://thebao.me"))
+            if let tweetComposer = facebookComposer {
+                self.present(tweetComposer, animated: true, completion: nil)
             }
         })
 
@@ -124,10 +150,11 @@ extension MemoPlaceTableViewController {
         })
 
         // Set the button color
-        shareAction.backgroundColor = UIColor.blue
-        deleteAction.backgroundColor = UIColor.red
+        facebookAction.backgroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+        twitterAction.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        deleteAction.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
 
-        return [deleteAction, shareAction]
+        return [deleteAction, twitterAction, facebookAction]
     }
 
 }

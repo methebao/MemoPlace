@@ -222,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M3i-90-e1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2741.25" y="107.74647887323944"/>
+            <point key="canvasLocation" x="3231" y="818"/>
         </scene>
         <!--Rating View Controller-->
         <scene sceneID="oCv-Tt-MhW">
@@ -343,7 +343,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vlb-iR-Y8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JlI-zV-IG4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3421.875" y="106.69014084507042"/>
+            <point key="canvasLocation" x="4162" y="1287"/>
         </scene>
         <!--New Place-->
         <scene sceneID="kVy-jr-a3r">
@@ -609,7 +609,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uZN-B5-2Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="nPC-ST-j9Q" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="996" y="-586"/>
+            <point key="canvasLocation" x="4090" y="-524"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="DVo-f1-ajC">
@@ -641,7 +641,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hj-rP-3ML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2740" y="-644.52773613193403"/>
+            <point key="canvasLocation" x="4161" y="389"/>
         </scene>
         <!--Walkthrough Page View Controller-->
         <scene sceneID="wgf-0B-grp">
@@ -649,7 +649,7 @@
                 <pageViewController storyboardIdentifier="WalkthroughController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="ol3-zC-FoA" customClass="WalkthroughPageViewController" customModule="MemoPlace" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9bz-bz-L0L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1264" y="-573"/>
+            <point key="canvasLocation" x="-1394" y="576"/>
         </scene>
         <!--Walkthrough Content View Controller-->
         <scene sceneID="9WM-LY-3As">
@@ -726,7 +726,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V9b-Ll-ebf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-542" y="-573"/>
+            <point key="canvasLocation" x="-673" y="576"/>
         </scene>
         <!--MemoPlace-->
         <scene sceneID="LDD-qQ-QqX">
@@ -763,7 +763,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfp-Ye-wxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="214" y="-586"/>
+            <point key="canvasLocation" x="3170" y="-524"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="cSA-l7-5rl">
